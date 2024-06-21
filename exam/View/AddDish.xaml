@@ -1,0 +1,40 @@
+﻿<Window x:Class="exam.View.AddDish"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:exam.View"
+        mc:Ignorable="d"
+        Title="AddDish" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <Label Margin="10 10 10 0">Имя</Label>
+            <TextBox Text="{Binding nameD}" Name="nameDish" Margin=" 10 0 10 10"></TextBox>
+            <ComboBox  SelectionChanged ="ComboBox_SelectionChanged" ItemsSource="{Binding ingredients}" Name="cbIngredients"  Height="25" Margin="10,0,10,0" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding nameI}"></Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+           
+            <Label Margin="10 10 10 0">Готово</Label>
+            <CheckBox TabIndex="{Binding ready}" Name="CheckItem" Margin="15 0 10 10"></CheckBox>
+            
+            <ListView DisplayMemberPath="nameI" Name="Items"></ListView>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <Button Click="SaveChanges" Margin="10" >Сохранить изменения</Button>
+            <Button Click="AddDishes" Margin="10" >Создать блюдо</Button>
+            <Button Click="Back"  Margin="10" >Назад</Button>
+        </StackPanel>
+    </Grid>
+</Window>

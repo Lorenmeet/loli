@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище dishesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameD" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ready" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="DishAndIngridients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameDish" Type="int" Nullable="false" />
+          <Property Name="nameI" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingredients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameI" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="protein" Type="float" Nullable="false" />
+          <Property Name="fat" Type="float" Nullable="false" />
+          <Property Name="carbonydrates" Type="float" Nullable="false" />
+          <Property Name="weightI" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__DishAndIn__nameD__3B75D760">
+          <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
+          <End Role="DishAndIngridients" Type="Self.DishAndIngridients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dish">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DishAndIngridients">
+              <PropertyRef Name="nameDish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DishAndIn__nameI__3C69FB99">
+          <End Role="Ingredients" Type="Self.Ingredients" Multiplicity="1" />
+          <End Role="DishAndIngridients" Type="Self.DishAndIngridients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DishAndIngridients">
+              <PropertyRef Name="nameI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище dishesModelContainer">
+          <EntitySet Name="Dish" EntityType="Self.Dish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DishAndIngridients" EntityType="Self.DishAndIngridients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredients" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DishAndIn__nameD__3B75D760" Association="Self.FK__DishAndIn__nameD__3B75D760">
+            <End Role="Dish" EntitySet="Dish" />
+            <End Role="DishAndIngridients" EntitySet="DishAndIngridients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DishAndIn__nameI__3C69FB99" Association="Self.FK__DishAndIn__nameI__3C69FB99">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="DishAndIngridients" EntitySet="DishAndIngridients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dishesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ready" Type="Byte" />
+          <NavigationProperty Name="DishAndIngridients" Relationship="Self.FK__DishAndIn__nameD__3B75D760" FromRole="Dish" ToRole="DishAndIngridients" />
+        </EntityType>
+        <EntityType Name="DishAndIngridient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameDish" Type="Int32" Nullable="false" />
+          <Property Name="nameI" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dish" Relationship="Self.FK__DishAndIn__nameD__3B75D760" FromRole="DishAndIngridients" ToRole="Dish" />
+          <NavigationProperty Name="Ingredient" Relationship="Self.FK__DishAndIn__nameI__3C69FB99" FromRole="DishAndIngridients" ToRole="Ingredients" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="protein" Type="Double" Nullable="false" />
+          <Property Name="fat" Type="Double" Nullable="false" />
+          <Property Name="carbonydrates" Type="Double" Nullable="false" />
+          <Property Name="weightI" Type="Double" Nullable="false" />
+          <NavigationProperty Name="DishAndIngridients" Relationship="Self.FK__DishAndIn__nameI__3C69FB99" FromRole="Ingredients" ToRole="DishAndIngridients" />
+        </EntityType>
+        <Association Name="FK__DishAndIn__nameD__3B75D760">
+          <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
+          <End Role="DishAndIngridients" Type="Self.DishAndIngridient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dish">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DishAndIngridients">
+              <PropertyRef Name="nameDish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DishAndIn__nameI__3C69FB99">
+          <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="1" />
+          <End Role="DishAndIngridients" Type="Self.DishAndIngridient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DishAndIngridients">
+              <PropertyRef Name="nameI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dishesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dishes" EntityType="Self.Dish" />
+          <EntitySet Name="DishAndIngridients" EntityType="Self.DishAndIngridient" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
+          <AssociationSet Name="FK__DishAndIn__nameD__3B75D760" Association="Self.FK__DishAndIn__nameD__3B75D760">
+            <End Role="Dish" EntitySet="Dishes" />
+            <End Role="DishAndIngridients" EntitySet="DishAndIngridients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DishAndIn__nameI__3C69FB99" Association="Self.FK__DishAndIn__nameI__3C69FB99">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="DishAndIngridients" EntitySet="DishAndIngridients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище dishesModelContainer" CdmEntityContainer="dishesEntities1">
+          <EntitySetMapping Name="Dishes">
+            <EntityTypeMapping TypeName="dishesModel.Dish">
+              <MappingFragment StoreEntitySet="Dish">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nameD" ColumnName="nameD" />
+                <ScalarProperty Name="ready" ColumnName="ready" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DishAndIngridients">
+            <EntityTypeMapping TypeName="dishesModel.DishAndIngridient">
+              <MappingFragment StoreEntitySet="DishAndIngridients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nameDish" ColumnName="nameDish" />
+                <ScalarProperty Name="nameI" ColumnName="nameI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredients">
+            <EntityTypeMapping TypeName="dishesModel.Ingredient">
+              <MappingFragment StoreEntitySet="Ingredients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nameI" ColumnName="nameI" />
+                <ScalarProperty Name="protein" ColumnName="protein" />
+                <ScalarProperty Name="fat" ColumnName="fat" />
+                <ScalarProperty Name="carbonydrates" ColumnName="carbonydrates" />
+                <ScalarProperty Name="weightI" ColumnName="weightI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

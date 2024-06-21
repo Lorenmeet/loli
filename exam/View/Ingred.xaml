@@ -1,0 +1,50 @@
+﻿<Window x:Class="exam.View.Ingred"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:exam.View"
+        mc:Ignorable="d"
+        Title="Ingred" Height="450" Width="800">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+
+            <Label Margin="10 5 10 0">Имя</Label>
+            <TextBox Name="NameIngred" Margin=" 10 0 10 10"></TextBox>
+            <Label Margin="10 5 10 0">Белки</Label>
+            <TextBox Name="ProtIngred" Margin=" 10 0 10 10"></TextBox>
+            <Label Margin="10 5 10 0">Жиры</Label>
+            <TextBox Name="FatIngred" Margin=" 10 0 10 10"></TextBox>
+            <Label Margin="10 5 10 0">Углеводы</Label>
+            <TextBox Name="CarbonyIngred" Margin=" 10 0 10 10"></TextBox>
+            <Label Margin="10 10 10 0">Вес</Label>
+            <TextBox Name="WeightIngred" Margin=" 10 0 10 10"></TextBox>
+
+            <Button Click="AddIngred" Margin="10 35 10 10">Добавить</Button>
+            <Button Click="DeleteIngred" Margin="10 0 10 10">Удалить</Button>
+            <Button Click="Back" Margin="200 0 10 10">Назад</Button>
+        </StackPanel>
+        <ListView SelectionChanged ="listView_SelectionChanged"  Grid.Column="0"  ItemsSource="{Binding ingredients}" Name="listView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                       <Run Text="{Binding nameI}"></Run>
+                        <Run Text="{Binding protein}"></Run>
+                        <Run Text="{Binding fat}"></Run>
+                        <Run Text="{Binding carbonydrates}"></Run>
+                        <Run Text="{Binding weightI}"></Run>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+
+
+    </Grid>
+</Window>

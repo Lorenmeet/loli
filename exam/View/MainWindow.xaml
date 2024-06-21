@@ -1,0 +1,52 @@
+﻿<Window x:Class="exam.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:exam"
+        mc:Ignorable="d" Background="White"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView  SelectionChanged ="listView_SelectionChanged"  Grid.Column="0"  ItemsSource="{Binding dishReady}" Name="listView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding Name}"></Run>
+                         <Run Text="{Binding Calories}"></Run>
+                         <Run Text="{Binding ProteinfatCarbohydrate}"></Run>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <Button Click="DelNotReady" Margin="10" >туда</Button>
+            <Button Click="DelReady" Margin="10" >сюда</Button>
+        </StackPanel>
+        <ListView  SelectionChanged ="listView_SelectionChanged"  Grid.Column="2"  ItemsSource="{Binding dishNotReady}" Name="listViewDontReady">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                <Run Text="{Binding Name}"></Run>
+                <Run Text="{Binding Calories}"></Run>
+                <Run Text="{Binding ProteinfatCarbohydrate}"></Run>
+                        
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Column="3">
+            <Button Click="Button_Click_Ingredients" Margin="10">Ингридиенты</Button>
+            <Button Click="Button_Click_DishRedact" Margin="10">Редактировать</Button>
+            <Button Click="Button_Click_DishCreate" Margin="10">Создать</Button>
+            <Button Click="Button_Click_Delete" Margin="10">Удалить</Button>
+        </StackPanel>
+
+
+    </Grid>
+</Window>
